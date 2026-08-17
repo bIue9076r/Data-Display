@@ -1,0 +1,5 @@
+*.exe
+*.png
+*.ppm
+*.txt
+stb_image_write.h
