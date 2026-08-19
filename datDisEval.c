@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "gdeclare.h"
+
 #include "genlib.c"
 #include "letters.c"
 #include "drawing.c"
@@ -8,6 +10,7 @@
 #include "display.c"
 
 #include "strlib.c"
+#include "commands.c"
 
 #define VERSION "0.0"
 
@@ -16,17 +19,92 @@ int gRunning = 1;
 int gWitdh = 600;
 int gHeight = 400;
 
-// Options
-// -h --help
-// -v --version
-// -i [input]
-
 void help(void){
 	printf("datDis Evaluator - Options\n");
 	printf("-h\t\t\t|\tHelp\n");
+	printf("-help\t\t\t|\n");
 	printf("-v\t\t\t|\tVersion\n");
-	printf("--help\t\t\t|\tHelp\n");
-	printf("--Version\t\t|\tVersion\n");
+	printf("-version\t\t|\n");
+	printf("-dh\t\t\t|\tDisplay Height\n");
+	printf("-height\t\t\t|\n");
+	printf("-dw\t\t\t|\tDisplay Witdh\n");
+	printf("-witdh\t\t\t|\n");
+	printf("-b\t\t\t|\tBorder\n");
+	printf("-border\t\t\t|\t\n");
+	printf("-bl\t\t\t|\tBorder Left\n");
+	printf("-border-left\t\t|\t\n");
+	printf("-br\t\t\t|\tBorder Right\n");
+	printf("-border-right\t\t|\t\n");
+	printf("-bu\t\t\t|\tBorder Up\n");
+	printf("-border-up\t\t|\t\n");
+	printf("-bd\t\t\t|\tBorder Down\n");
+	printf("-border-down\t\t|\t\n");
+	printf("-bc\t\t\t|\tBorder Color\n");
+	printf("-border-color\t\t|\t\n");
+	printf("-lc\t\t\t|\tLine Color\n");
+	printf("-line-color\t\t|\t\n");
+	printf("-ac\t\t\t|\tAxis Color\n");
+	printf("-axis-color\t\t|\t\n");
+	printf("-cc\t\t\t|\tChar Color\n");
+	printf("-char-color\t\t|\t\n");
+	printf("-vc\t\t\t|\tView Color\n");
+	printf("-view-color\t\t|\t\n");
+	printf("-xs\t\t\t|\tX Start\n");
+	printf("-x-start\t\t|\t\n");
+	printf("-ys\t\t\t|\tY Start\n");
+	printf("-y-start\t\t|\t\n");
+	printf("-xe\t\t\t|\tX End\n");
+	printf("-x-end\t\t\t|\t\n");
+	printf("-ye\t\t\t|\tY End\n");
+	printf("-y-end\t\t\t|\t\n");
+	printf("-xr\t\t\t|\tX Range\n");
+	printf("-x-range\t\t|\t\n");
+	printf("-yr\t\t\t|\tY Range\n");
+	printf("-y-range\t\t|\t\n");
+	printf("-xp\t\t\t|\tX Padding\n");
+	printf("-x-padding\t\t|\t\n");
+	printf("-yp\t\t\t|\tY Padding\n");
+	printf("-y-padding\t\t|\t\n");
+	printf("-xl\t\t\t|\tX Lines\n");
+	printf("-x-lines\t\t|\t\n");
+	printf("-yl\t\t\t|\tY Lines\n");
+	printf("-y-lines\t\t|\t\n");
+	printf("-xlsy\t\t\t|\tX Lines Square Y\n");
+	printf("-x-lines-sy\t\t|\t\n");
+	printf("-ylsx\t\t\t|\tY Lines Square X\n");
+	printf("-y-lines-sx\t\t|\t\n");
+	printf("-cs\t\t\t|\tChar size\n");
+	printf("-char-size\t\t|\t\n");
+	printf("-lw\t\t\t|\tLine Width\n");
+	printf("-line-width\t\t|\t\n");
+	printf("-alw\t\t\t|\tAxis Line Width\n");
+	printf("-axis-line-width\t|\t\n");
+	printf("-xff\t\t\t|\tX Figure Format\n");
+	printf("-x-figure-format\t|\t\n");
+	printf("-yff\t\t\t|\tY Figure Format\n");
+	printf("-y-figure-format\t|\t\n");
+	printf("-ff\t\t\t|\tFigure Format\n");
+	printf("-figure-format\t\t|\t\n");
+	printf("-sxl\t\t\t|\tShow X Lines\n");
+	printf("-show-x-lines\t\t|\t\n");
+	printf("-syl\t\t\t|\tShow Y Lines\n");
+	printf("-show-y-lines\t\t|\t\n");
+	printf("-sl\t\t\t|\tShow Lines\n");
+	printf("-show-lines\t\t|\t\n");
+	printf("-dl\t\t\t|\tDashed Lines\n");
+	printf("-dashed-line\t\t|\t\n");
+	printf("-sxa\t\t\t|\tShow X Axis\n");
+	printf("-show-x-axis\t\t|\t\n");
+	printf("-sya\t\t\t|\tShow Y Axis\n");
+	printf("-show-y-axis\t\t|\t\n");
+	printf("-sa\t\t\t|\tShow Axis\n");
+	printf("-show-axis\t\t|\t\n");
+	printf("-sxf\t\t\t|\tShow X Figures\n");
+	printf("-show-x-figures\t\t|\t\n");
+	printf("-syf\t\t\t|\tShow Y Figures\n");
+	printf("-show-y-figures\t\t|\t\n");
+	printf("-sf\t\t\t|\tShow Figures\n");
+	printf("-show-figures\t\t|\t\n");
 }
 
 void badArg(str_t* s,int b){
@@ -60,33 +138,8 @@ void err(int e){
 	}
 }
 
-str_t arg_strings[] = {
-	(str_t){.len=2,.str="-h"},
-	(str_t){.len=6,.str="--help"},
-	(str_t){.len=9,.str="--version"},
-	(str_t){.len=2,.str="-v"},
-	(str_t){.len=2,.str="-i"},
-	(str_t){.len=7,.str="--input"},
-};
-
-// Commands
-// v / version
-// h / help
-
-void commandHelp(int i){
-	printf("Commands\n");
-	printf("h / help\t\t|\tHelp\n");
-	printf("v / version\t\t|\tVersion\n");
-}
-
-str_t commands[] = {
-	(str_t){.len=7,.str="version"},
-	(str_t){.len=1,.str="v"},
-	(str_t){.len=4,.str="help"},
-	(str_t){.len=1,.str="h"},
-	(str_t){.len=4,.str="exit"},
-	(str_t){.len=4,.str="plot"},
-};
+#include "args.c"
+#include "commands.c"
 
 char* readInput(void){
 	printf("\n> ");
@@ -140,83 +193,15 @@ int eval(str_t* input){
 
 	// str_tprintln(&command);
 	// str_tprintln(&params);
-
-	if(str_tequ(&command,&commands[0]) || str_tequ(&command,&commands[1])){
-		version();
-	}
-
-	if(str_tequ(&command,&commands[2]) || str_tequ(&command,&commands[3])){
-		if(params.len > 0){
-			commandHelp(str_ttoi(&params));
-		}else{
-			commandHelp(0);
-		}
-	}
-
-	if(str_tequ(&command,&commands[4])){
-		gRunning = 0;
-	}
-
-	if(str_tequ(&command,&commands[5])){
-		if(params.len > 0){
-			str_t trail = {.len = 0, .str = NULL};
-			str_tsplit(&params,&trail);
-
-			char str[params.len + 1];
-			for(int i = 0; i < params.len; i++){
-				str[i] = params.str[i];
-			}
-			str[params.len] = 0;
-			
-			ShowColorBuffer(&gDisplay,str);
-
-			printf("Ploted display to \"");
-			str_tprint(&params);
-			printf("\"\n");
-
-			if(trail.len > 0){
-				printf("Warning: Trailing parameters\n");
-				printf("-> ");
-				str_tprintln(&trail);
-			}
-		}else{
-			printf("Missing parameters for plot\n");
-		}
-	}
-
-	return 0;
+	return runCommand(&command, &params);;
 }
 
 int main(int argc, char** argv){
+	gDisplay.colorBuffer = NULL;
 	newDisplay(&gDisplay,gHeight,gWitdh);
 	// Parse Input args
-	if(argc > 1){
-		int bad = 0;
-		for(int i = 1; i < argc; i++){
-			str_t a; str_tnew(&a,argv[i]);
-			if(str_tequ(&a,&arg_strings[0]) || str_tequ(&a,&arg_strings[1])){
-				help();
-				goto quikexit;
-			}
-
-			if(str_tequ(&a,&arg_strings[2]) || str_tequ(&a,&arg_strings[3])){
-				version();
-				goto quikexit;
-			}
-
-			if(str_tequ(&a,&arg_strings[4]) || str_tequ(&a,&arg_strings[5])){
-				for(int j = i + 1; j < argc; j++){
-					str_t line;
-					str_tnew(&line,argv[j]);
-					eval(&line);
-				}
-				goto quikexit;
-			}
-
-			// default
-			badArg(&a,bad);
-			bad = 1;
-		}
+	if(readArgs(argc,argv)){
+		goto quikexit;
 	}
 
 	while(gRunning){

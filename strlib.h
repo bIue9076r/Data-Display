@@ -15,5 +15,8 @@ long long int str_ttoll(str_t* a);
 float str_ttof(str_t* a);
 double str_ttod(str_t* a);
 void str_tprint(str_t* a);
+void str_tprintln(str_t* a);
+int str_tsplitde(str_t* src, str_t* des, char del);
+int str_tsplit(str_t* src, str_t* des);
 
 #endif

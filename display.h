@@ -7,8 +7,10 @@
 
 int invalidDisplay(display_t* dis);
 void fprintColor3(FILE* file, color3_t* c);
+void printColor3(color3_t* c);
 int ShowColorBuffer_Ppm(display_t* dis, char* path);
 int ShowDataInfo(display_t* dis, char* path);
+void PrintDataInfo(display_t* dis);
 void setBorderColor(display_t* dis, color3_t* clr);
 void setLineColor(display_t* dis, color3_t* clr);
 void setAxisColor(display_t* dis, color3_t* clr);
@@ -37,6 +39,9 @@ void setYlinesSx(display_t* dis, int l);
 void setCharsize(display_t* dis, int s);
 void setLineWidth(display_t* dis, int lw);
 void setAxisLineWidth(display_t* dis, int lw);
+void setXFigureFormat(display_t* dis, char* f);
+void setYFigureFormat(display_t* dis, char* f);
+void setFigureFormat(display_t* dis, char* f);
 void showXlines(display_t* dis, char b);
 void showYlines(display_t* dis, char b);
 void showLines(display_t* dis, char b);
@@ -44,6 +49,9 @@ void dashedLine(display_t* dis, char b);
 void showXAxis(display_t* dis, char b);
 void showYAxis(display_t* dis, char b);
 void showAxis(display_t* dis, char b);
+void showXFigures(display_t* dis, char b);
+void showYFigures(display_t* dis, char b);
+void showFigures(display_t* dis, char b);
 void newDisplay(display_t* dis, int h, int w);
 
 #define DISPLAY_STB_IMAGE

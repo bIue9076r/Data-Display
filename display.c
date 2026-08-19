@@ -15,6 +15,10 @@ void fprintColor3(FILE* file, color3_t* c){
 	fprintf(file,"%d %d %d\n",c->red,c->green,c->blue);
 }
 
+void printColor3(color3_t* c){
+	printf("%d %d %d\n",c->red,c->green,c->blue);
+}
+
 int ShowColorBuffer_Ppm(display_t* dis, char* path){
 	if(invalidDisplay(dis)){
 		printf("Error: Invalid display");
@@ -93,6 +97,30 @@ int ShowDataInfo(display_t* dis, char* path){
 	fprintf(file,"Char Color: "); fprintColor3(file,&dis->char_color);
 
 	return 0;
+}
+
+void PrintDataInfo(display_t* dis){
+	printf("Display Info\n");
+	printf("Borders:\n\tLeft: %d\n\tRight: %d\n\tUp: %d\n\tDown: %d\n\t",dis->borders.left,dis->borders.right,dis->borders.up,dis->borders.down);
+	printf("Color: "); printColor3(&dis->border_color);
+	printf("Viewbox:\n\tWidth: %d\n\tHeight: %d\n\t",dis->viewbox.width,dis->viewbox.height);
+	printf("X range: (%.5f, %.5f)\n\tY range: (%.5f, %.5f)\n\t",dis->viewbox.x_start,dis->viewbox.x_end,dis->viewbox.y_end,dis->viewbox.y_start);
+	printf("Y padding: %.5f\t\n\t",dis->viewbox.y_pad);
+	printf("X padding: %.5f\t\n",dis->viewbox.x_pad);
+	printf("Lines:\n\t\tX: %s\n\t\tY: %s\n",(dis->viewbox.show_x_lines)?("YES"):("NAY"),(dis->viewbox.show_y_lines)?("YES"):("NAY"));
+	printf("\t\tLine Color: "); printColor3(&dis->line_color);
+	printf("\t\tLine Width: %d\n",dis->viewbox.line_width);
+	if(dis->viewbox.show_x_lines){
+		printf("\t\tX lines: %d\n",dis->viewbox.x_lines);
+	}
+	if(dis->viewbox.show_y_lines){
+		printf("\t\tY lines: %d\n",dis->viewbox.y_lines);
+	}
+	printf("Axis:\n\t\tX: %s\n\t\tY: %s\n",(dis->viewbox.show_x_axis)?("YES"):("NAY"),(dis->viewbox.show_y_axis)?("YES"):("NAY"));
+	printf("\t\tAxis Color: "); printColor3(&dis->axis_color);
+	printf("\t\tAxis Line Width: %d\n",dis->viewbox.axis_line_width);
+	printf("Dashed Lines: %s\n",(dis->viewbox.dashed_line)?("YES"):("NAY"));
+	printf("Char Color: "); printColor3(&dis->char_color);
 }
 
 void setBorderColor(display_t* dis, color3_t* clr){
