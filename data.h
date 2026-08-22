@@ -69,4 +69,26 @@ typedef struct data_s {
 //		0
 //	}
 
+
+data_list_t newDataList(void);
+int isDataListEmpty(data_list_t* list);
+index_t appendDataToList(data_list_t* list, data_t* dat);
+void changeDataInList(data_list_t* list, data_t* dat, index_t index);
+void PlotXList_Color(display_t* dis, color3_t* clr, data_list_t* xlist);
+void PlotXList(display_t* dis, data_list_t* xlist);
+void PlotYList_Color(display_t* dis, color3_t* clr, data_list_t* ylist);
+void PlotYList(display_t* dis, data_list_t* ylist);
+void PlotXYList_Color(display_t* dis, color3_t* clr, data_list_t* xlist, data_list_t* ylist);
+void PlotXYList(display_t* dis, data_list_t* xlist, data_list_t* ylist);
+void PlotList_Combined_Color(display_t* dis, color3_t* clr, data_list_t* list);
+void PlotList_Combined(display_t* dis, data_list_t* list);
+void RePlotXList_Color(display_t* dis, color3_t* clr, data_list_t* xlist);
+void RePlotXList(display_t* dis, data_list_t* xlist);
+void RePlotYList_Color(display_t* dis, color3_t* clr, data_list_t* ylist);
+void RePlotYList(display_t* dis, data_list_t* ylist);
+void RePlotXYList_Color(display_t* dis, color3_t* clr, data_list_t* xlist, data_list_t* ylist);
+void RePlotXYList(display_t* dis, data_list_t* xlist, data_list_t* ylist);
+void RePlotList_Combined_Color(display_t* dis, color3_t* clr, data_list_t* list);
+void RePlotList_Combined(display_t* dis, data_list_t* list);
+
 #endif

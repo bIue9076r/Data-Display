@@ -123,9 +123,9 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					gHeight = str_ttoi(&b);
+					if(gHeight <= 0){ gHeight = 400; }
+					setDisplaySize(&gDisplay,gHeight,gWitdh);
 				}
-				if(gHeight <= 0){ gHeight = 400; }
-				setDisplaySize(&gDisplay,gHeight,gWitdh);
 				passed = 0;
 			}
 
@@ -133,9 +133,9 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					gWitdh = str_ttoi(&b);
+					if(gWitdh <= 0){ gWitdh = 600; }
+					setDisplaySize(&gDisplay,gHeight,gWitdh);
 				}
-				if(gWitdh <= 0){ gWitdh = 600; }
-				setDisplaySize(&gDisplay,gHeight,gWitdh);
 				passed = 0;
 			}
 
@@ -143,6 +143,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int border = str_ttoi(&b);
+					if(border < 0){ border = 0; }
 					setBorder(&gDisplay,border);
 				}
 				passed = 0;
@@ -152,6 +153,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int border = str_ttoi(&b);
+					if(border < 0){ border = 0; }
 					setBorderLeft(&gDisplay,border);
 				}
 				passed = 0;
@@ -161,6 +163,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int border = str_ttoi(&b);
+					if(border < 0){ border = 0; }
 					setBorderRight(&gDisplay,border);
 				}
 				passed = 0;
@@ -170,6 +173,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int border = str_ttoi(&b);
+					if(border < 0){ border = 0; }
 					setBorderUp(&gDisplay,border);
 				}
 				passed = 0;
@@ -179,6 +183,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int border = str_ttoi(&b);
+					if(border < 0){ border = 0; }
 					setBorderDown(&gDisplay,border);
 				}
 				passed = 0;
@@ -316,6 +321,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					float x = str_ttof(&b);
+					if(x < 0.0){ x = 0.0; }
 					setXpad(&gDisplay,x);
 				}
 				passed = 0;
@@ -325,6 +331,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					float y = str_ttof(&b);
+					if(y < 0.0){ y = 0.0; }
 					setYpad(&gDisplay,y);
 				}
 				passed = 0;
@@ -334,6 +341,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int x = str_ttoi(&b);
+					if(x < 0){ x = 0; }
 					setXlines(&gDisplay,x);
 				}
 				passed = 0;
@@ -343,6 +351,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int y = str_ttoi(&b);
+					if(y < 0){ y = 0; }
 					setYlines(&gDisplay,y);
 				}
 				passed = 0;
@@ -352,6 +361,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int x = str_ttoi(&b);
+					if(x < 0){ x = 0; }
 					setXlinesSy(&gDisplay,x);
 				}
 				passed = 0;
@@ -361,6 +371,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int y = str_ttoi(&b);
+					if(y < 0){ y = 0; }
 					setYlinesSx(&gDisplay,y);
 				}
 				passed = 0;
@@ -370,6 +381,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int s = str_ttoi(&b);
+					if(s <= 0){ s = 1; }
 					setCharsize(&gDisplay,s);
 				}
 				passed = 0;
@@ -379,6 +391,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int w = str_ttoi(&b);
+					if(w <= 0){ w = 1; }
 					setLineWidth(&gDisplay,w);
 				}
 				passed = 0;
@@ -388,6 +401,7 @@ int readArgs(int argc, char** argv){
 				if(i + 1 < argc){
 					str_t b; str_tnew(&b,argv[++i]);
 					int w = str_ttoi(&b);
+					if(w <= 0){ w = 1; }
 					setAxisLineWidth(&gDisplay,w);
 				}
 				passed = 0;
