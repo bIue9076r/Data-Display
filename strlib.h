@@ -19,4 +19,6 @@ void str_tprintln(str_t* a);
 int str_tsplitde(str_t* src, str_t* des, char del);
 int str_tsplit(str_t* src, str_t* des);
 
+float str_tfunc(str_t* func);
+int str_tfunc_i(str_t* func);
 #endif

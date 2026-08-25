@@ -51,6 +51,25 @@
 #define CMD_SHOW_X_FIGURES	44
 #define CMD_SHOW_Y_FIGURES	45
 #define CMD_SHOW_FIGURES	46
+#define CMD_HSV	47
+#define CMD_RGB	48
+#define CMD_FLUSH	49
+#define CMD_POINT	50
+#define CMD_VLINE	51
+#define CMD_HLINE	52
+#define CMD_VLINES	53
+#define CMD_HLINES	54
+#define CMD_PUTC	55
+#define CMD_PRINT	56
+#define CMD_PLOT_XLINES	57
+#define CMD_PLOT_YLINES	58
+#define CMD_PLOT_XAXIS	59
+#define CMD_PLOT_YAXIS	60
+#define CMD_PLOT_LINES	61
+#define CMD_FUNCT	62
+#define CMD_REFUNCT	63
+#define CMD_INEQU	64
+#define CMD_REINEQU	65
 
 #define CMD(C) str_tequ(command,&commands[C])
 
@@ -101,6 +120,29 @@ void cmd_show_axis(str_t* command, str_t* params);
 void cmd_show_x_figures(str_t* command, str_t* params);
 void cmd_show_y_figures(str_t* command, str_t* params);
 void cmd_show_figures(str_t* command, str_t* params);
+
+// Plotting Commands
+void cmd_hsv(str_t* command, str_t* params);
+void cmd_rgb(str_t* command, str_t* params);
+void cmd_flush(str_t* command, str_t* params);
+void cmd_point(str_t* command, str_t* params);
+void cmd_vline(str_t* command, str_t* params);
+void cmd_hline(str_t* command, str_t* params);
+void cmd_vlines(str_t* command, str_t* params);
+void cmd_hlines(str_t* command, str_t* params);
+void cmd_putc(str_t* command, str_t* params);
+void cmd_print(str_t* command, str_t* params);
+void cmd_plot_xlines(str_t* command, str_t* params);
+void cmd_plot_ylines(str_t* command, str_t* params);
+void cmd_plot_xaxis(str_t* command, str_t* params);
+void cmd_plot_yaxis(str_t* command, str_t* params);
+void cmd_plot_lines(str_t* command, str_t* params);
+void cmd_funct(str_t* command, str_t* params);
+void cmd_refunct(str_t* command, str_t* params);
+void cmd_inequ(str_t* command, str_t* params);
+void cmd_reinequ(str_t* command, str_t* params);
+
+// Data Commands
 
 int runCommand(str_t* command, str_t* params);
 

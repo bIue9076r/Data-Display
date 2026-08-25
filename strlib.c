@@ -17,6 +17,7 @@ void str_tnew(str_t* a, char* str){
 	}
 
 	a->str = str;
+	a->len = 0;
 	for(int i = 0; str[i] != 0; i++){
 		a->len = i + 1;
 	}
@@ -251,6 +252,15 @@ int str_tsplitde(str_t* src, str_t* des, char del){
 
 int str_tsplit(str_t* src, str_t* des){
 	return str_tsplitde(src,des,' ');
+}
+
+// string to fuction
+float str_tfunc(str_t* func){
+
+}
+
+int str_tfunc_i(str_t* func){
+	
 }
 
 #endif

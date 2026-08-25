@@ -21,59 +21,78 @@ void commandHelp(int i){
 		default:
 		case 0:
 			printf("Commands\n",i);
-			printf("h / help\t\t|\tHelp\n");
-			printf("v / version\t\t|\tVersion\n");
-			printf("exit\t\t\t|\tExit\n");
+			printf("%-20s|%30s\n","h / help","Help");
+			printf("%-20s|%30s\n","v / version","Version");
+			printf("%-20s|%30s\n","exit","Exit");
 		break;
 
 		case 1:
 			printf("Commands page %d - Display\n",i);
-			printf("plot\t\t\t|\tPlot\n");
-			printf("show\t\t\t|\tShow\n");
-			printf("height\t\t\t|\tHeight\n");
-			printf("width\t\t\t|\tWidth\n");
-			printf("border\t\t\t|\tBorder\n");
-			printf("border-left\t\t|\tBorder Left\n");
-			printf("border-right\t\t|\tBorder Right\n");
-			printf("border-up\t\t|\tBorder Up\n");
-			printf("border-down\t\t|\tBorder Down\n");
-			printf("border-color\t\t|\tBorder Color\n");
-			printf("line-color\t\t|\tLine Color\n");
-			printf("axis-color\t\t|\tAxis Color\n");
-			printf("char-color\t\t|\tChar Color\n");
-			printf("view-color\t\t|\tView Color\n");
-			printf("x-start\t\t\t|\tX Start\n");
-			printf("y-start\t\t\t|\tY Start\n");
-			printf("x-end\t\t\t|\tX End\n");
-			printf("y-end\t\t\t|\tY End\n");
-			printf("x-range\t\t\t|\tX Range\n");
-			printf("y-range\t\t\t|\tY Range\n");
-			printf("x-padding\t\t|\tX Padding\n");
-			printf("y-padding\t\t|\tY Padding\n");
-			printf("x-lines\t\t\t|\tX Lines\n");
-			printf("y-lines\t\t\t|\tY Lines\n");
-			printf("x-lines-sy\t\t|\tX Lines Square y\n");
-			printf("y-lines-sx\t\t|\tY Lines Square x\n");
-			printf("char-size\t\t|\tChar Size\n");
-			printf("line-width\t\t|\tLine Width\n");
-			printf("axis-line-width\t\t|\tAxis Line Width\n");
-			printf("x-figure-format\t\t|\tX Figure Format\n");
-			printf("y-figure-format\t\t|\tY Figure Format\n");
-			printf("figure-format\t\t|\tFigure Format\n");
-			printf("show-x-lines\t\t|\tShow X Lines\n");
-			printf("show-y-lines\t\t|\tShow Y Lines\n");
-			printf("show-lines\t\t|\tShow Lines\n");
-			printf("dashed-line\t\t|\tDashed Line\n");
-			printf("show-x-axis\t\t|\tShow X Axis\n");
-			printf("show-y-axis\t\t|\tShow Y Axis\n");
-			printf("show-axis\t\t|\tShow Axis\n");
-			printf("show-x-figures\t\t|\tShow X Figures\n");
-			printf("show-y-figures\t\t|\tShow Y Figures\n");
-			printf("show-figures\t\t|\tShow Figures\n");
+			printf("%-20s|%30s\n","plot","Plot");
+			printf("%-20s|%30s\n","show","Show");
+			printf("%-20s|%30s\n","height","Height");
+			printf("%-20s|%30s\n","width","Width");
+			printf("%-20s|%30s\n","border","Border");
+			printf("%-20s|%30s\n","border-left","Border Left");
+			printf("%-20s|%30s\n","border-right","Border Right");
+			printf("%-20s|%30s\n","border-up","Border Up");
+			printf("%-20s|%30s\n","border-down","Border Down");
+			printf("%-20s|%30s\n","border-color","Border Color");
+			printf("%-20s|%30s\n","line-color","Line Color");
+			printf("%-20s|%30s\n","axis-color","Axis Color");
+			printf("%-20s|%30s\n","char-color","Char Color");
+			printf("%-20s|%30s\n","view-color","View Color");
+			printf("%-20s|%30s\n","x-start","X Start");
+			printf("%-20s|%30s\n","y-start","Y Start");
+			printf("%-20s|%30s\n","x-end","X End");
+			printf("%-20s|%30s\n","y-end","Y End");
+			printf("%-20s|%30s\n","x-range","X Range");
+			printf("%-20s|%30s\n","y-range","Y Range");
+			printf("%-20s|%30s\n","x-padding","X Padding");
+			printf("%-20s|%30s\n","y-padding","Y Padding");
+			printf("%-20s|%30s\n","x-lines","X Lines");
+			printf("%-20s|%30s\n","y-lines","Y Lines");
+			printf("%-20s|%30s\n","x-lines-sy","X Lines Square y");
+			printf("%-20s|%30s\n","y-lines-sx","Y Lines Square x");
+			printf("%-20s|%30s\n","char-size","Char Size");
+			printf("%-20s|%30s\n","line-width","Line Width");
+			printf("%-20s|%30s\n","axis-line-width","Axis Line Width");
+			printf("%-20s|%30s\n","x-figure-format","X Figure Format");
+			printf("%-20s|%30s\n","y-figure-format","Y Figure Format");
+			printf("%-20s|%30s\n","figure-format","Figure Format");
+			printf("%-20s|%30s\n","show-x-lines","Show X Lines");
+			printf("%-20s|%30s\n","show-y-lines","Show Y Lines");
+			printf("%-20s|%30s\n","show-lines","Show Lines");
+			printf("%-20s|%30s\n","dashed-line","Dashed Line");
+			printf("%-20s|%30s\n","show-x-axis","Show X Axis");
+			printf("%-20s|%30s\n","show-y-axis","Show Y Axis");
+			printf("%-20s|%30s\n","show-axis","Show Axis");
+			printf("%-20s|%30s\n","show-x-figures","Show X Figures");
+			printf("%-20s|%30s\n","show-y-figures","Show Y Figures");
+			printf("%-20s|%30s\n","show-figures","Show Figures");
 		break;
 
 		case 2:
 			printf("Commands page %d - Ploting\n",i);
+			printf("%-20s|%30s\n","hsv"," RGB to HSV");
+			printf("%-20s|%30s\n","rgb"," HSV to RGB");
+			printf("%-20s|%30s\n","flush","Flush Color Buffer");
+			printf("%-20s|%30s\n","point","Plot Point");
+			printf("%-20s|%30s\n","vline","Plot Vertical Line");
+			printf("%-20s|%30s\n","hline","Plot Horizontal Line");
+			printf("%-20s|%30s\n","vlines","Plot Vertical Lines");
+			printf("%-20s|%30s\n","hlines","Plot Horizontal Lines");
+			printf("%-20s|%30s\n","putc","Put Char");
+			printf("%-20s|%30s\n","print","Print String");
+			printf("%-20s|%30s\n","plot-xlines","Plot X Lines");
+			printf("%-20s|%30s\n","plot-ylines","Plot Y Lines");
+			printf("%-20s|%30s\n","plot-xaxis","Plot X Axis");
+			printf("%-20s|%30s\n","plot-yaxis","Plot Y Axis");
+			printf("%-20s|%30s\n","plot-lines","Plot Viewbox Lines");
+			printf("%-20s|%30s\n","funct","Plot Function");
+			printf("%-20s|%30s\n","refunct","Replot Function");
+			printf("%-20s|%30s\n","inequ","Plot Inequality");
+			printf("%-20s|%30s\n","reinequ","Replot Inequality");
 		break;
 
 		case 3:
@@ -108,7 +127,7 @@ void cmd_plot(str_t* command, str_t* params){
 		
 		ShowColorBuffer(&gDisplay,str);
 
-		printf("Ploted display to \"");
+		printf("Plotted display to \"");
 		str_tprint(params);
 		printf("\"\n");
 
@@ -964,7 +983,317 @@ void cmd_show_figures(str_t* command, str_t* params){
 }
 
 // Plotting Commands
+void cmd_hsv(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
 
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		if(params3.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params3,&trail);
+
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			colorHSV3_t v = RGBtoHSV(&c);
+			printf("HSV Color: ");
+			printColorHSV3(&v);
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A Color needs 3 values\n");
+		}
+	}else{
+		printf("Error: No Color given\n");
+	}
+}
+
+void cmd_rgb(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		if(params3.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params3,&trail);
+
+			int cr = str_ttof(params);
+			int cg = str_ttof(&params2);
+			int cb = str_ttof(&params3);
+			colorHSV3_t c = (colorHSV3_t){.Hue=cr,.Sat=cg,.Val=cb};
+			color3_t v = HSVtoRGB(&c);
+			printf("RGB Color: ");
+			printColor3(&v);
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A Color needs 3 values\n");
+		}
+	}else{
+		printf("Error: No Color given\n");
+	}
+}
+
+void cmd_flush(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		if(params3.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params3,&trail);
+
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			flushColorBuffer(&gDisplay,&c);
+			printf("Color: ");
+			printColor3(&c);
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A Color needs 3 values\n");
+		}
+	}else{
+		printf("Error: No Color given\n");
+	}
+}
+
+void cmd_point(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		str_t params5 = {.len = 0, .str = NULL};
+		str_tsplit(&params4,&params5);
+
+		if(params5.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params5,&trail);
+
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+
+			int x = str_ttoi(&params4);
+			int y = str_ttoi(&params5);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			Point_Bound(&gDisplay,&c,x,y);
+			printf("Plotted point at (%d,%d)\n",x,y);
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A Point needs 5 (r,g,b) (x,y) values\n");
+		}
+	}else{
+		printf("Error: No Color or Point given\n");
+	}
+}
+
+void cmd_vline(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+
+		int x = str_ttoi(params);
+		Vline(&gDisplay,x);
+		printf("Plotted Vertical line at %d\n",x);
+
+		showTrail(&trail);
+	}else{
+		printf("Error: No position given\n");
+	}
+}
+
+void cmd_hline(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+
+		int y = str_ttoi(params);
+		Hline(&gDisplay,y);
+		printf("Plotted Horizontal line at %d\n",y);
+
+		showTrail(&trail);
+	}else{
+		printf("Error: No position given\n");
+	}
+}
+
+void cmd_vlines(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+
+		int n = str_ttoi(params);
+		Vlines(&gDisplay,n);
+		printf("Plotted Vertical lines\n");
+
+		showTrail(&trail);
+	}else{
+		printf("Error: No number given\n");
+	}
+}
+
+void cmd_hlines(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+
+		int n = str_ttoi(params);
+		Hlines(&gDisplay,n);
+		printf("Plotted Horizontal lines\n");
+
+		showTrail(&trail);
+	}else{
+		printf("Error: No number given\n");
+	}
+}
+
+void cmd_putc(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		if(params3.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params3,&trail);
+
+			char c = params->str[0];
+			int cx = str_ttoi(&params2);
+			int cy = str_ttoi(&params3);
+
+			printf("Put [%c] at (%d,%d)\n",c,cx,cy);
+			BufPutc(&gDisplay,c,cx,cy);
+			showTrail(&trail);
+		}else{
+			printf("Error: A Char needs 3 (c) (x,y) values\n");
+		}
+	}else{
+		printf("Error: No char or point given\n");
+	}
+}
+
+void cmd_print(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		if(params3.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params3,&trail);
+
+			char str[params->len + 1];
+			for(int i = 0; i < params->len; i++){
+				str[i] = params->str[i];
+			}
+			str[params->len] = 0;
+			int cx = str_ttoi(&params2);
+			int cy = str_ttoi(&params3);
+			BufStrPrint(&gDisplay,str,cx,cy);
+			printf("Put [%s] at (%d,%d)\n",str,cx,cy);
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A String needs 3 (s) (x,y) values\n");
+		}
+	}else{
+		printf("Error: No string or point given\n");
+	}
+}
+
+void cmd_plot_xlines(str_t* command, str_t* params){
+	PlotXlines(&gDisplay);
+	printf("Plotted X Lines\n");
+}
+
+void cmd_plot_ylines(str_t* command, str_t* params){
+	PlotYlines(&gDisplay);
+	printf("Plotted Y Lines\n");
+}
+
+void cmd_plot_xaxis(str_t* command, str_t* params){
+	PlotXaxis(&gDisplay);
+	printf("Plotted X Axis\n");
+}
+
+void cmd_plot_yaxis(str_t* command, str_t* params){
+	PlotYaxis(&gDisplay);
+	printf("Plotted Y Axis\n");
+}
+
+void cmd_plot_lines(str_t* command, str_t* params){
+	PlotViewBoxLines(&gDisplay);
+	printf("Plotted Viewbox Lines\n");
+}
+
+void cmd_funct(str_t* command, str_t* params){
+	// void PlotFunc_Color(display_t* dis, color3_t* clr, func* fun);
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		if(params4.len > 0){
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+
+			int x = str_ttoi(&params4);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			
+			// PlotFunc_Color(&gDisplay,&c);
+			printf("WIP: Plotted function\n");
+		}else{
+			printf("Error: A Function needs 4 (r,g,b) f(x) values\n");
+		}
+	}else{
+		printf("Error: No Color or Function given\n");
+	}
+}
+
+void cmd_refunct(str_t* command, str_t* params){
+	// void RePlotFunc_Color(display_t* dis, color3_t* clr, func* fun);
+	printf("WIP: Plotted function\n");
+}
+
+void cmd_inequ(str_t* command, str_t* params){
+	// void PlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type);
+	printf("WIP: Plotted inequality\n");
+}
+
+void cmd_reinequ(str_t* command, str_t* params){
+	// void RePlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type);
+	printf("WIP: Plotted inequality\n");
+}
 
 // Data Commands
 
@@ -1017,6 +1346,25 @@ str_t commands[] = {
 	(str_t){.len=14,.str="show-x-figures"},
 	(str_t){.len=14,.str="show-y-figures"},
 	(str_t){.len=12,.str="show-figures"},
+	(str_t){.len=3,.str="hsv"},
+	(str_t){.len=3,.str="rgb"},
+	(str_t){.len=5,.str="flush"},
+	(str_t){.len=5,.str="point"},
+	(str_t){.len=5,.str="vline"},
+	(str_t){.len=5,.str="hline"},
+	(str_t){.len=6,.str="vlines"},
+	(str_t){.len=6,.str="hlines"},
+	(str_t){.len=4,.str="putc"},
+	(str_t){.len=5,.str="print"},
+	(str_t){.len=11,.str="plot-xlines"},
+	(str_t){.len=11,.str="plot-ylines"},
+	(str_t){.len=10,.str="plot-xaxis"},
+	(str_t){.len=10,.str="plot-yaxis"},
+	(str_t){.len=17,.str="plot-lines"},
+	(str_t){.len=5,.str="funct"},
+	(str_t){.len=7,.str="refunct"},
+	(str_t){.len=5,.str="inequ"},
+	(str_t){.len=7,.str="reinequ"},
 };
 
 int runCommand(str_t* command, str_t* params){
@@ -1245,6 +1593,100 @@ int runCommand(str_t* command, str_t* params){
 		return 0;
 	}
 
+	if(CMD(CMD_HSV)){
+		cmd_hsv(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_RGB)){
+		cmd_rgb(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_FLUSH)){
+		cmd_flush(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_POINT)){
+		cmd_point(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_VLINE)){
+		cmd_vline(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_HLINE)){
+		cmd_hline(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_VLINES)){
+		cmd_vlines(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_HLINES)){
+		cmd_hlines(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PUTC)){
+		cmd_putc(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PRINT)){
+		cmd_print(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_XLINES)){
+		cmd_plot_xlines(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_YLINES)){
+		cmd_plot_ylines(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_XAXIS)){
+		cmd_plot_xaxis(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_YAXIS)){
+		cmd_plot_yaxis(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_LINES)){
+		cmd_plot_lines(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_FUNCT)){
+		cmd_funct(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_REFUNCT)){
+		cmd_refunct(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_INEQU)){
+		cmd_inequ(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_REINEQU)){
+		cmd_reinequ(command,params);
+		return 0;
+	}
 
 	// Invalid command
 	printf("Unknown Command\n");

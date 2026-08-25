@@ -210,6 +210,10 @@ int main(int argc, char** argv){
 		str_t input;
 		str_tnew(&input,str);
 
+		if(input.len == 0){
+			continue;
+		}
+
 		// Evaluate
 		int e = eval(&input);
 		if(e){

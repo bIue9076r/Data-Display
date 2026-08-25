@@ -19,6 +19,10 @@ void printColor3(color3_t* c){
 	printf("%d %d %d\n",c->red,c->green,c->blue);
 }
 
+void printColorHSV3(colorHSV3_t* c){
+	printf("%f %f %f\n",c->Hue,c->Sat,c->Val);
+}
+
 int ShowColorBuffer_Ppm(display_t* dis, char* path){
 	if(invalidDisplay(dis)){
 		printf("Error: Invalid display");

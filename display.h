@@ -8,6 +8,7 @@
 int invalidDisplay(display_t* dis);
 void fprintColor3(FILE* file, color3_t* c);
 void printColor3(color3_t* c);
+void printColorHSV3(colorHSV3_t* c);
 int ShowColorBuffer_Ppm(display_t* dis, char* path);
 int ShowDataInfo(display_t* dis, char* path);
 void PrintDataInfo(display_t* dis);
