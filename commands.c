@@ -1250,8 +1250,12 @@ void cmd_plot_lines(str_t* command, str_t* params){
 	printf("Plotted Viewbox Lines\n");
 }
 
+float executeFunc(float x){
+	localSet(&gVars,&(str_t){.len=1,.str = "x"},VAR_TYPE_FLOAT,&x);
+	return vstr_tfunc(&gFunct);
+}
+
 void cmd_funct(str_t* command, str_t* params){
-	// void PlotFunc_Color(display_t* dis, color3_t* clr, func* fun);
 	if(params->len > 0){
 		str_t params2 = {.len = 0, .str = NULL};
 		str_tsplit(params,&params2);
@@ -1267,11 +1271,12 @@ void cmd_funct(str_t* command, str_t* params){
 			int cg = str_ttoi(&params2);
 			int cb = str_ttoi(&params3);
 
-			int x = str_ttoi(&params4);
+			str_tcopy(&params4,&gFunct);
 			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
 			
-			// PlotFunc_Color(&gDisplay,&c);
-			printf("WIP: Plotted function\n");
+			PlotFunc_Color(&gDisplay,&c,&executeFunc);
+			printf("Plotted function\n");
+			str_tprintln(&params4);
 		}else{
 			printf("Error: A Function needs 4 (r,g,b) f(x) values\n");
 		}
@@ -1281,18 +1286,133 @@ void cmd_funct(str_t* command, str_t* params){
 }
 
 void cmd_refunct(str_t* command, str_t* params){
-	// void RePlotFunc_Color(display_t* dis, color3_t* clr, func* fun);
-	printf("WIP: Plotted function\n");
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		if(params4.len > 0){
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+
+			str_tcopy(&params4,&gFunct);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			
+			RePlotFunc_Color(&gDisplay,&c,&executeFunc);
+			printf("Plotted function\n");
+			str_tprintln(&params4);
+		}else{
+			printf("Error: A Function needs 4 (r,g,b) f(x) values\n");
+		}
+	}else{
+		printf("Error: No Color or Function given\n");
+	}
 }
 
 void cmd_inequ(str_t* command, str_t* params){
-	// void PlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type);
-	printf("WIP: Plotted inequality\n");
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		str_t params5 = {.len = 0, .str = NULL};
+		str_tsplit(&params4,&params5);
+
+		if(params5.len > 0){
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+
+			int ty = INEQ_TYPE_LESS_THAN;
+			if(params4.len > 1){
+				if(params4.str[0] == '<'){
+					ty = INEQ_TYPE_LESS_THAN;
+					if(params4.str[0] == '='){
+						ty = INEQ_TYPE_LESS_THAN_OR_EQU;
+					}
+				}
+
+				if(params4.str[0] == '>'){
+					ty = INEQ_TYPE_GREATER_THAN;
+					if(params4.str[0] == '='){
+						ty = INEQ_TYPE_GREATER_THAN_OR_EQU;
+					}
+				}
+			}
+
+			str_tcopy(&params5,&gFunct);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			
+			PlotIneq_Color(&gDisplay,&c,&executeFunc,ty);
+			printf("Plotted inequality\n");
+			str_tprintln(&params5);
+		}else{
+			printf("Error: An Inequality needs 5 (r,g,b) (< > <= >=) f(x) values\n");
+		}
+	}else{
+		printf("Error: No Color or Inequality given\n");
+	}
 }
 
 void cmd_reinequ(str_t* command, str_t* params){
-	// void RePlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type);
-	printf("WIP: Plotted inequality\n");
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		str_t params5 = {.len = 0, .str = NULL};
+		str_tsplit(&params4,&params5);
+
+		if(params5.len > 0){
+			int cr = str_ttoi(params);
+			int cg = str_ttoi(&params2);
+			int cb = str_ttoi(&params3);
+
+			int ty = INEQ_TYPE_LESS_THAN;
+			if(params4.len > 1){
+				if(params4.str[0] == '<'){
+					ty = INEQ_TYPE_LESS_THAN;
+					if(params4.str[0] == '='){
+						ty = INEQ_TYPE_LESS_THAN_OR_EQU;
+					}
+				}
+
+				if(params4.str[0] == '>'){
+					ty = INEQ_TYPE_GREATER_THAN;
+					if(params4.str[0] == '='){
+						ty = INEQ_TYPE_GREATER_THAN_OR_EQU;
+					}
+				}
+			}
+
+			str_tcopy(&params5,&gFunct);
+			color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+			
+			PlotIneq_Color(&gDisplay,&c,&executeFunc,ty);
+			printf("Plotted inequality\n");
+			str_tprintln(&params5);
+		}else{
+			printf("Error: An Inequality needs 5 (r,g,b) (< > <= >=) f(x) values\n");
+		}
+	}else{
+		printf("Error: No Color or Inequality given\n");
+	}
 }
 
 // Data Commands

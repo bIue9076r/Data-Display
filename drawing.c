@@ -393,7 +393,7 @@ void PlotViewBoxLines(display_t* dis){
 	}
 }
 
-void PlotFunc_Color(display_t* dis, color3_t* clr, func* fun){
+void PlotFunc_Color(display_t* dis, color3_t* clr, func_t* fun){
 	flushColorBuffer(dis,&dis->view_color);
 	float ymax = fun(dis->viewbox.x_start);
 	float ymin = fun(dis->viewbox.x_start);
@@ -429,12 +429,12 @@ void PlotFunc_Color(display_t* dis, color3_t* clr, func* fun){
 	free(ys);
 }
 
-void PlotFunc(display_t* dis, func* fun){
+void PlotFunc(display_t* dis, func_t* fun){
 	color3_t clr = (color3_t){0,0,0};
 	PlotFunc_Color(dis,&clr,fun);
 }
 
-void RePlotFunc_Color(display_t* dis, color3_t* clr, func* fun){
+void RePlotFunc_Color(display_t* dis, color3_t* clr, func_t* fun){
 	float ymax = dis->viewbox.y_start;
 	float ymin = dis->viewbox.y_end;
 
@@ -463,12 +463,12 @@ void RePlotFunc_Color(display_t* dis, color3_t* clr, func* fun){
 	free(ys);
 }
 
-void RePlotFunc(display_t* dis, func* fun){
+void RePlotFunc(display_t* dis, func_t* fun){
 	color3_t clr = (color3_t){0,0,0};
 	RePlotFunc_Color(dis,&clr,fun);
 }
 
-void PlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type){
+void PlotIneq_Color(display_t* dis, color3_t* clr, func_t* fun, int type){
 	flushColorBuffer(dis,&dis->view_color);
 	float ymax = fun(dis->viewbox.x_start);
 	float ymin = fun(dis->viewbox.x_start);
@@ -530,12 +530,12 @@ void PlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type){
 	free(ys);
 }
 
-void PlotIneq(display_t* dis, func* fun, int type){
+void PlotIneq(display_t* dis, func_t* fun, int type){
 	color3_t clr = (color3_t){0,0,0};
 	PlotIneq_Color(dis,&clr,fun,type);
 }
 
-void RePlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type){
+void RePlotIneq_Color(display_t* dis, color3_t* clr, func_t* fun, int type){
 	float ymax = dis->viewbox.y_start;
 	float ymin = dis->viewbox.y_end;
 	
@@ -590,7 +590,7 @@ void RePlotIneq_Color(display_t* dis, color3_t* clr, func* fun, int type){
 	free(ys);
 }
 
-void RePlotIneq(display_t* dis, func* fun, int type){
+void RePlotIneq(display_t* dis, func_t* fun, int type){
 	color3_t clr = (color3_t){0,0,0};
 	RePlotIneq_Color(dis,&clr,fun,type);
 }

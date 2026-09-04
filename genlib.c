@@ -6,8 +6,32 @@ int i_abs(int x){
 	return (x < 0)?(-x):(x);
 }
 
+int i_sign(int x){
+	if(x > 0){
+		return 1;
+	}
+
+	if(x < 0){
+		return -1;
+	}
+
+	return 0;
+}
+
 float f_abs(float x){
 	return (x < 0.0)?(-x):(x);
+}
+
+float f_sign(float x){
+	if(x > 0.0){
+		return 1.0;
+	}
+
+	if(x < 0.0){
+		return -1.0;
+	}
+
+	return 0.0;
 }
 
 float f_mod(float x, float d){

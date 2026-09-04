@@ -322,7 +322,8 @@ void newDisplay(display_t* dis, int h, int w){
 	showLines(dis,YES);
 	dashedLine(dis,NAY);
 	showAxis(dis,NAY);
-	showFigures(dis,YES);
+	showYFigures(dis,YES);
+	showXFigures(dis,NAY);
 	flushColorBuffer(dis,&dis->view_color);
 }
 

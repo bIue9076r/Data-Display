@@ -137,6 +137,7 @@ void cmd_plot_ylines(str_t* command, str_t* params);
 void cmd_plot_xaxis(str_t* command, str_t* params);
 void cmd_plot_yaxis(str_t* command, str_t* params);
 void cmd_plot_lines(str_t* command, str_t* params);
+float executeFunc(float x);
 void cmd_funct(str_t* command, str_t* params);
 void cmd_refunct(str_t* command, str_t* params);
 void cmd_inequ(str_t* command, str_t* params);

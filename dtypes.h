@@ -62,6 +62,6 @@ typedef struct display_s {
 	color3_t view_color;
 } display_t;
 
-typedef float func(float);
+typedef float func_t(float);
 
 #endif

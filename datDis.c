@@ -7,10 +7,12 @@
 #include "data.c"
 #include "display.c"
 
+// 2(x^2) - x - 2
 float f(float x){
 	return 2*x*x - x - 2;
 }
 
+// f(2x) = 2(2x)^2 - 2x - 2
 float g(float x){
 	return f(2*x);
 }

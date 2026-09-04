@@ -10,6 +10,8 @@
 #include "display.c"
 
 #include "strlib.c"
+#include "lvars.c"
+#include "vstrfunc.c"
 #include "commands.c"
 
 #define VERSION "0.0"
@@ -18,6 +20,8 @@ display_t gDisplay;
 int gRunning = 1;
 int gWitdh = 600;
 int gHeight = 400;
+localVars_t gVars;
+str_t gFunct = (str_t){.len = 0, .str = NULL};
 
 void help(void){
 	printf("datDis Evaluator - Options\n");
@@ -199,6 +203,8 @@ int eval(str_t* input){
 int main(int argc, char** argv){
 	gDisplay.colorBuffer = NULL;
 	newDisplay(&gDisplay,gHeight,gWitdh);
+	newVarsList(&gVars);
+
 	// Parse Input args
 	if(readArgs(argc,argv)){
 		goto quikexit;
