@@ -24,7 +24,7 @@ void updateVar(localVar_t* var, int type, void* v){
 
 		case VAR_TYPE_LIST:
 			if(v){
-				var->v.type_list = *((void**)v);
+				var->v.type_list = v;
 			}
 		break;
 
@@ -155,6 +155,45 @@ Var_t localGet(localVars_t* list, str_t* n){
 		}
 	}else{
 		return (Var_t){.type_int = 0};
+	}
+}
+
+Tvar_t localGetType(localVars_t* list, str_t* n){
+	if(localExists(list,n)){
+		for(int i = 0; i < list->len; i++){
+			if(str_tequ(n,&list->vars[i].name)){
+				return (Tvar_t){.v = list->vars[i].v, .type = list->vars[i].type};
+			}
+		}
+	}else{
+		return (Tvar_t){.v = {.type_int = 0}, .type = VAR_TYPE_INT};
+	}
+}
+
+void appendStrPool(str_pool_t* parent, char* str){
+	while(parent != NULL){
+		parent = parent->next;
+	}
+
+	if(parent != NULL){
+		parent->next = malloc(sizeof(str_pool_t));
+		parent->next->next = NULL;
+		parent->next->str_home = str;
+	}else{
+		parent = malloc(sizeof(str_pool_t));
+		parent->next = NULL;
+		parent->str_home = str;
+	}
+}
+
+void freeStrPool(str_pool_t* p){
+	while(p != NULL){
+		if(p->str_home != NULL){
+			free(p->str_home);
+		}
+		str_pool_t* t = p->next;
+		free(p);
+		p = t;
 	}
 }
 

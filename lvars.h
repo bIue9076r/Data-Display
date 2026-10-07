@@ -16,6 +16,11 @@ typedef union Var_u {
 	str_t type_func;
 } Var_t;
 
+typedef struct Tvar_s {
+	Var_t v;
+	int type;
+} Tvar_t;
+
 typedef struct localVar_s {
 	str_t name;
 	int type;
@@ -27,6 +32,11 @@ typedef struct localVars_s {
 	localVar_t* vars;
 } localVars_t;
 
+typedef struct str_pool_s {
+	char* str_home;
+	struct str_pool_s* next;
+} str_pool_t;
+
 void updateVar(localVar_t* var, int type, void* v);
 void newVarsList(localVars_t* list);
 int localExists(localVars_t* list, str_t* n);
@@ -34,5 +44,8 @@ void localNew(localVars_t* list, str_t* n, int type, void* v);
 void localUpdate(localVars_t* list, str_t* n, int type, void* v);
 void localSet(localVars_t* list, str_t* n, int type, void* v);
 Var_t localGet(localVars_t* list, str_t* n);
+Tvar_t localGetType(localVars_t* list, str_t* n);
+void appendStrPool(str_pool_t* parent, char* str);
+void freeStrPool(str_pool_t* p);
 
 #endif

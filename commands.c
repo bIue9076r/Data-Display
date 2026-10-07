@@ -97,6 +97,20 @@ void commandHelp(int i){
 
 		case 3:
 			printf("Commands page %d - Data\n",i);
+			printf("%-20s|%30s\n","new-list","New List");
+			printf("%-20s|%30s\n","empty-list","Empty List");
+			printf("%-20s|%30s\n","app-list","App List");
+			printf("%-20s|%30s\n","inx-list","Index List");
+			printf("%-20s|%30s\n","plot-x-list","Plot X List");
+			printf("%-20s|%30s\n","plot-y-list","Plot Y List");
+			printf("%-20s|%30s\n","plot-xy-list","Plot XY List");
+			printf("%-20s|%30s\n","replot-x-list","Replot X List");
+			printf("%-20s|%30s\n","replot-y-list","Replot Y List");
+			printf("%-20s|%30s\n","replot-xy-list","Replot XY List");
+			printf("%-20s|%30s\n","show-list","Show List");
+			printf("%-20s|%30s\n","show-list","Show List to N");
+			printf("%-20s|%30s\n","var","Variable");
+			printf("%-20s|%30s\n","show-var","Show Variable");
 		break;
 	}
 }
@@ -1416,7 +1430,542 @@ void cmd_reinequ(str_t* command, str_t* params){
 }
 
 // Data Commands
+void cmd_new_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+		if(localExists(&gVars,params)){
+			printf("Error: List already exists\n");
+		}else{
+			data_list_t* list = malloc(sizeof(data_list_t));
+			data_list_t r = newDataList();
+			list->lenght = r.lenght;
+			list->list = r.list;
+			char* tstr = malloc((params->len + 1) * sizeof(char));
+			for(int i = 0; i < params->len; i++){
+				tstr[i] = params->str[i];
+			}
+			str_t var = {.len = params->len, .str = tstr};
+			appendStrPool(gSPool,tstr);
+			localNew(&gVars,&var,VAR_TYPE_LIST,list);
+			printf("Created List\n");
+		}
+		showTrail(&trail);
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
 
+void cmd_empty_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+		if(localExists(&gVars,params)){
+			Tvar_t v = localGetType(&gVars,params);
+			if(v.type == VAR_TYPE_LIST){
+				int res = isDataListEmpty(v.v.type_list);
+				if(res){
+					printf("List is empty\n");
+				}else{
+					printf("List is not empty\n");
+				}
+			}else{
+				printf("Error: Not a list\n");
+			}
+		}else{
+			printf("Error: List does not exist\n");
+		}		
+		showTrail(&trail);
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
+
+void cmd_app_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		if(localExists(&gVars,params)){
+			Tvar_t v = localGetType(&gVars,params);
+			if(v.type == VAR_TYPE_LIST){
+				int res = isDataListEmpty(v.v.type_list);
+				if(res){
+					printf("List is empty; Created List\n");
+				}
+
+				str_t trail = {.len = 0, .str = NULL};
+				str_tsplit(&params2,&trail);
+
+				float f = 0.0;
+				if(params2.len > 0){
+					f = str_ttof(&params2);
+				}
+
+				data_t d;
+				d.type = DP_TYPE_FRA;
+				d.data.frac = f;
+				appendDataToList(v.v.type_list,&d);
+				printf("Added %f to list\n",f);
+
+				showTrail(&trail);
+			}else{
+				printf("Error: Not a list\n");
+			}
+		}else{
+			printf("Error: List does not exist\n");
+		}
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
+
+void cmd_inx_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		if(params2.len > 0){
+			if(localExists(&gVars,params)){
+				Tvar_t v = localGetType(&gVars,params);
+				if(v.type == VAR_TYPE_LIST){
+					int index = str_ttod(&params2);
+
+					str_t trail = {.len = 0, .str = NULL};
+					str_tsplit(&params3,&trail);
+
+					float f = 0.0;
+					if(params3.len > 0){
+						f = str_ttof(&params3);
+					}
+
+					data_list_t* VL = v.v.type_list;
+					if(index < VL->lenght){
+						VL->list[index].data.frac = f;
+						printf("Updated [%d] with %f\n",index,f);
+					}else{
+						printf("Error: Index out of Range\n");
+					}
+
+					showTrail(&trail);
+				}else{
+					printf("Error: Not a list\n");
+				}
+			}else{
+				printf("Error: List does not exist\n");
+			}
+		}else{
+			printf("Error: No Index given\n");
+		}
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
+
+void cmd_plot_x_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		if(params4.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params4,&trail);
+
+			if(localExists(&gVars,&params4)){
+				Tvar_t v = localGetType(&gVars,&params4);
+
+				int cr = str_ttoi(params);
+				int cg = str_ttoi(&params2);
+				int cb = str_ttoi(&params3);
+
+				if(v.type == VAR_TYPE_LIST){
+					int res = isDataListEmpty(v.v.type_list);
+					if(res){
+						printf("List is empty\n");
+					}else{
+						color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+						PlotXList_Color(&gDisplay,&c,v.v.type_list);
+						printf("Plotted List\n");
+					}
+				}else{
+					printf("Error: Not a list\n");
+				}
+			}else{
+				printf("Error: List does not exist\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A List plot needs 4 (r,g,b) [name] values\n");
+		}
+	}else{
+		printf("Error: No Color or Name given\n");
+	}
+}
+
+void cmd_plot_y_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		if(params4.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params4,&trail);
+
+			if(localExists(&gVars,&params4)){
+				Tvar_t v = localGetType(&gVars,&params4);
+
+				int cr = str_ttoi(params);
+				int cg = str_ttoi(&params2);
+				int cb = str_ttoi(&params3);
+
+				if(v.type == VAR_TYPE_LIST){
+					int res = isDataListEmpty(v.v.type_list);
+					if(res){
+						printf("List is empty\n");
+					}else{
+						color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+						PlotYList_Color(&gDisplay,&c,v.v.type_list);
+						printf("Plotted List\n");
+					}
+				}else{
+					printf("Error: Not a list\n");
+				}
+			}else{
+				printf("Error: List does not exist\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A List plot needs 4 (r,g,b) [name] values\n");
+		}
+	}else{
+		printf("Error: No Color or Name given\n");
+	}
+}
+
+void cmd_plot_xy_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		str_t params5 = {.len = 0, .str = NULL};
+		str_tsplit(&params4,&params5);
+
+		if(params5.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params5,&trail);
+
+			if(localExists(&gVars,&params4) && localExists(&gVars,&params5)){
+				Tvar_t v1 = localGetType(&gVars,&params4);
+				Tvar_t v2 = localGetType(&gVars,&params5);
+
+				int cr = str_ttoi(params);
+				int cg = str_ttoi(&params2);
+				int cb = str_ttoi(&params3);
+
+				if(v1.type == VAR_TYPE_LIST && v2.type == VAR_TYPE_LIST){
+					int res = isDataListEmpty(v1.v.type_list) || isDataListEmpty(v2.v.type_list);
+					if(res){
+						printf("One or Both lists are empty\n");
+					}else{
+						color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+						PlotXYList_Color(&gDisplay,&c,v1.v.type_list,v2.v.type_list);
+						printf("Plotted List\n");
+					}
+				}else{
+					printf("Error: One or Both lists are not a list\n");
+				}
+			}else{
+				printf("Error: One or Both Lists does not exist\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A XY List plot needs 5 (r,g,b) [name 1] [name 2] values\n");
+		}
+	}else{
+		printf("Error: No Color or Names given\n");
+	}
+}
+
+void cmd_replot_x_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		if(params4.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params4,&trail);
+
+			if(localExists(&gVars,&params4)){
+				Tvar_t v = localGetType(&gVars,&params4);
+
+				int cr = str_ttoi(params);
+				int cg = str_ttoi(&params2);
+				int cb = str_ttoi(&params3);
+
+				if(v.type == VAR_TYPE_LIST){
+					int res = isDataListEmpty(v.v.type_list);
+					if(res){
+						printf("List is empty\n");
+					}else{
+						color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+						RePlotXList_Color(&gDisplay,&c,v.v.type_list);
+						printf("Plotted List\n");
+					}
+				}else{
+					printf("Error: Not a list\n");
+				}
+			}else{
+				printf("Error: List does not exist\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A List plot needs 4 (r,g,b) [name] values\n");
+		}
+	}else{
+		printf("Error: No Color or Name given\n");
+	}
+}
+
+void cmd_replot_y_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		if(params4.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params4,&trail);
+
+			if(localExists(&gVars,&params4)){
+				Tvar_t v = localGetType(&gVars,&params4);
+
+				int cr = str_ttoi(params);
+				int cg = str_ttoi(&params2);
+				int cb = str_ttoi(&params3);
+
+				if(v.type == VAR_TYPE_LIST){
+					int res = isDataListEmpty(v.v.type_list);
+					if(res){
+						printf("List is empty\n");
+					}else{
+						color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+						RePlotYList_Color(&gDisplay,&c,v.v.type_list);
+						printf("Replotted List\n");
+					}
+				}else{
+					printf("Error: Not a list\n");
+				}
+			}else{
+				printf("Error: List does not exist\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A List plot needs 4 (r,g,b) [name] values\n");
+		}
+	}else{
+		printf("Error: No Color or Name given\n");
+	}
+}
+
+void cmd_replot_xy_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t params3 = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&params3);
+
+		str_t params4 = {.len = 0, .str = NULL};
+		str_tsplit(&params3,&params4);
+
+		str_t params5 = {.len = 0, .str = NULL};
+		str_tsplit(&params4,&params5);
+
+		if(params5.len > 0){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(&params5,&trail);
+
+			if(localExists(&gVars,&params4) && localExists(&gVars,&params5)){
+				Tvar_t v1 = localGetType(&gVars,&params4);
+				Tvar_t v2 = localGetType(&gVars,&params5);
+
+				int cr = str_ttoi(params);
+				int cg = str_ttoi(&params2);
+				int cb = str_ttoi(&params3);
+
+				if(v1.type == VAR_TYPE_LIST && v2.type == VAR_TYPE_LIST){
+					int res = isDataListEmpty(v1.v.type_list) || isDataListEmpty(v2.v.type_list);
+					if(res){
+						printf("One or Both lists are empty\n");
+					}else{
+						color3_t c = (color3_t){.red=cr,.green=cg,.blue=cb};
+						RePlotXYList_Color(&gDisplay,&c,v1.v.type_list,v2.v.type_list);
+						printf("Plotted List\n");
+					}
+				}else{
+					printf("Error: One or Both lists are not a list\n");
+				}
+			}else{
+				printf("Error: One or Both Lists does not exist\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: A XY List plot needs 5 (r,g,b) [name 1] [name 2] values\n");
+		}
+	}else{
+		printf("Error: No Color or Names given\n");
+	}
+}
+
+void cmd_show_list(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(params,&trail);
+		if(localExists(&gVars,params)){
+			Tvar_t v = localGetType(&gVars,params);
+			if(v.type == VAR_TYPE_LIST){
+				int res = isDataListEmpty(v.v.type_list);
+				if(res){
+					printf("List is empty\n");
+				}else{
+					data_list_t* VL = v.v.type_list;
+					printf("[");
+					for(int i = 0; i < VL->lenght; i++){
+						printf("%f",VL->list[i].data.frac);
+						if(i < VL->lenght - 1){
+							printf(", ");
+						}
+					}
+					printf("]");
+				}
+			}else{
+				printf("Error: Not a list\n");
+			}
+		}else{
+			printf("Error: List does not exist\n");
+		}		
+		showTrail(&trail);
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
+
+void cmd_show_listn(str_t* command, str_t* params){
+
+}
+
+void cmd_var(str_t* command, str_t* params){
+	if(params->len > 0){
+		str_t params2 = {.len = 0, .str = NULL};
+		str_tsplit(params,&params2);
+
+		str_t trail = {.len = 0, .str = NULL};
+		str_tsplit(&params2,&trail);
+
+		if(localExists(&gVars,params)){
+			Tvar_t v = localGetType(&gVars,params);
+			if(v.type == VAR_TYPE_FLOAT){
+				float f = 0.0;
+				if(params2.len > 0){
+					f = str_ttof(&params2);
+				}
+
+				char* tstr = malloc((params->len + 1) * sizeof(char));
+				for(int i = 0; i < params->len; i++){
+					tstr[i] = params->str[i];
+				}
+				str_t var = {.len = params->len, .str = tstr};
+				appendStrPool(gSPool,tstr);
+				localSet(&gVars,&(str_t){.len=1,.str = tstr},VAR_TYPE_FLOAT,&f);
+				str_tprint(params);
+				printf("= %f\n",f);
+
+			}else{
+				printf("Error: Not a var\n");
+			}
+		}else{
+			float f = 0.0;
+			if(params2.len > 0){
+				f = str_ttof(&params2);
+			}
+
+			char* tstr = malloc((params->len + 1) * sizeof(char));
+			for(int i = 0; i < params->len; i++){
+				tstr[i] = params->str[i];
+			}
+			str_t var = {.len = params->len, .str = tstr};
+			appendStrPool(gSPool,tstr);
+			localSet(&gVars,&(str_t){.len=1,.str = tstr},VAR_TYPE_FLOAT,&f);
+			str_tprint(params);
+			printf(" = %f\n",f);
+		}
+
+		showTrail(&trail);
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
+
+void cmd_show_var(str_t* command, str_t* params){
+	if(params->len > 0){
+		if(localExists(&gVars,params)){
+			str_t trail = {.len = 0, .str = NULL};
+			str_tsplit(params,&trail);
+
+			Tvar_t v = localGetType(&gVars,params);
+			if(v.type == VAR_TYPE_FLOAT){
+				str_tprint(params);
+				printf(" = %f\n",v.v.type_float);
+			}else{
+				printf("Error: Not a Var\n");
+			}
+
+			showTrail(&trail);
+		}else{
+			printf("Error: Var does not exist\n");
+		}
+	}else{
+		printf("Error: No Name given\n");
+	}
+}
 
 str_t commands[] = {
 	(str_t){.len=7,.str="version"},
@@ -1485,6 +2034,20 @@ str_t commands[] = {
 	(str_t){.len=7,.str="refunct"},
 	(str_t){.len=5,.str="inequ"},
 	(str_t){.len=7,.str="reinequ"},
+	(str_t){.len=8,.str="new-list"},
+	(str_t){.len=10,.str="empty-list"},
+	(str_t){.len=8,.str="app-list"},
+	(str_t){.len=8,.str="inx-list"},
+	(str_t){.len=11,.str="plot-x-list"},
+	(str_t){.len=11,.str="plot-y-list"},
+	(str_t){.len=12,.str="plot-xy-list"},
+	(str_t){.len=13,.str="replot-x-list"},
+	(str_t){.len=13,.str="replot-y-list"},
+	(str_t){.len=14,.str="replot-xy-list"},
+	(str_t){.len=9,.str="show-list"},
+	(str_t){.len=10,.str="show-listn"},
+	(str_t){.len=3,.str="var"},
+	(str_t){.len=8,.str="show-var"},
 };
 
 int runCommand(str_t* command, str_t* params){
@@ -1807,6 +2370,77 @@ int runCommand(str_t* command, str_t* params){
 		cmd_reinequ(command,params);
 		return 0;
 	}
+
+	if(CMD(CMD_NEW_LIST)){
+		cmd_new_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_EMPTY_LIST)){
+		cmd_empty_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_APP_LIST)){
+		cmd_app_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_INX_LIST)){
+		cmd_inx_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_X_LIST)){
+		cmd_plot_x_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_Y_LIST)){
+		cmd_plot_y_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_PLOT_XY_LIST)){
+		cmd_plot_xy_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_REPLOT_X_LIST)){
+		cmd_replot_x_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_REPLOT_Y_LIST)){
+		cmd_replot_y_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_REPLOT_XY_LIST)){
+		cmd_replot_xy_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_SHOW_LIST)){
+		cmd_show_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_SHOW_LISTN)){
+		cmd_show_list(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_VAR)){
+		cmd_var(command,params);
+		return 0;
+	}
+
+	if(CMD(CMD_SHOW_VAR)){
+		cmd_show_var(command,params);
+		return 0;
+	}
+
 
 	// Invalid command
 	printf("Unknown Command\n");

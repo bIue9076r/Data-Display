@@ -70,6 +70,20 @@
 #define CMD_REFUNCT	63
 #define CMD_INEQU	64
 #define CMD_REINEQU	65
+#define CMD_NEW_LIST	66
+#define CMD_EMPTY_LIST	67
+#define CMD_APP_LIST	68
+#define CMD_INX_LIST	69
+#define CMD_PLOT_X_LIST	70
+#define CMD_PLOT_Y_LIST	71
+#define CMD_PLOT_XY_LIST	72
+#define CMD_REPLOT_X_LIST	73
+#define CMD_REPLOT_Y_LIST	74
+#define CMD_REPLOT_XY_LIST	75
+#define CMD_SHOW_LIST	76
+#define CMD_SHOW_LISTN	77
+#define CMD_VAR	78
+#define CMD_SHOW_VAR	79
 
 #define CMD(C) str_tequ(command,&commands[C])
 
@@ -144,6 +158,20 @@ void cmd_inequ(str_t* command, str_t* params);
 void cmd_reinequ(str_t* command, str_t* params);
 
 // Data Commands
+void cmd_new_list(str_t* command, str_t* params);
+void cmd_empty_list(str_t* command, str_t* params);
+void cmd_app_list(str_t* command, str_t* params);
+void cmd_inx_list(str_t* command, str_t* params);
+void cmd_plot_x_list(str_t* command, str_t* params);
+void cmd_plot_y_list(str_t* command, str_t* params);
+void cmd_plot_xy_list(str_t* command, str_t* params);
+void cmd_replot_x_list(str_t* command, str_t* params);
+void cmd_replot_y_list(str_t* command, str_t* params);
+void cmd_replot_xy_list(str_t* command, str_t* params);
+void cmd_show_list(str_t* command, str_t* params);
+void cmd_show_list(str_t* command, str_t* params);
+void cmd_var(str_t* command, str_t* params);
+void cmd_show_var(str_t* command, str_t* params);
 
 int runCommand(str_t* command, str_t* params);
 

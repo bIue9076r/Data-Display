@@ -11,6 +11,7 @@ extern int gRunning;
 extern int gWitdh;
 extern int gHeight;
 extern localVars_t gVars;
+extern str_pool_t* gSPool;
 extern str_t gFunct;
 
 extern str_t arg_strings[];

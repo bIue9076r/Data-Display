@@ -21,6 +21,7 @@ int gRunning = 1;
 int gWitdh = 600;
 int gHeight = 400;
 localVars_t gVars;
+str_pool_t* gSPool = NULL;
 str_t gFunct = (str_t){.len = 0, .str = NULL};
 
 void help(void){
@@ -204,6 +205,22 @@ int main(int argc, char** argv){
 	gDisplay.colorBuffer = NULL;
 	newDisplay(&gDisplay,gHeight,gWitdh);
 	newVarsList(&gVars);
+	
+	float e = 2.71828182846;
+	float pi = 3.14159265359;
+
+	char* t = malloc(sizeof(char) * 2);
+	t[0] = 'e';
+	t[1] = 0;
+	appendStrPool(gSPool,t);
+	localSet(&gVars,&(str_t){.len=1,.str = t},VAR_TYPE_FLOAT,&e);
+
+	t = malloc(sizeof(char) * 3);
+	t[0] = 'p';
+	t[1] = 'i';
+	t[2] = 0;
+	appendStrPool(gSPool,t);
+	localSet(&gVars,&(str_t){.len=2,.str = t},VAR_TYPE_FLOAT,&pi);
 
 	// Parse Input args
 	if(readArgs(argc,argv)){
@@ -232,6 +249,16 @@ int main(int argc, char** argv){
 
 	// free memory
 	quikexit:
+	if(gVars.vars != NULL){
+		for(int i = 0; i < gVars.len; i++){
+			if(gVars.vars[i].type == VAR_TYPE_LIST){
+				free(gVars.vars[i].v.type_list);
+			}
+		}
+
+		free(gVars.vars);
+	}
+	freeStrPool(gSPool);
 	freeColorBuffer(&gDisplay);
 	return 0;
 }
