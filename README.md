@@ -15,8 +15,12 @@ Customizable borders, background, colors, dimensions, and lines.
 
 ---
 
-# Data Evaluator (wip)
+# Data Evaluator
 
 Command line evaluator that reads input and acts on a local display.
 
-> wip | soon to have most commands from Data Display.
+Supports
+
+- functions
+- inequalities
+- lists

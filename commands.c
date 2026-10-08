@@ -1494,21 +1494,21 @@ void cmd_app_list(str_t* command, str_t* params){
 					printf("List is empty; Created List\n");
 				}
 
-				str_t trail = {.len = 0, .str = NULL};
-				str_tsplit(&params2,&trail);
-
-				float f = 0.0;
-				if(params2.len > 0){
+				while(params2.len > 0){
+					str_t next = {.len = 0, .str = NULL};
+					str_tsplit(&params2,&next);
+					
+					float f = 0.0;
 					f = str_ttof(&params2);
+
+					data_t d;
+					d.type = DP_TYPE_FRA;
+					d.data.frac = f;
+					appendDataToList(v.v.type_list,&d);
+					printf("Added %f to list\n",f);
+
+					str_tcopy(&next,&params2);
 				}
-
-				data_t d;
-				d.type = DP_TYPE_FRA;
-				d.data.frac = f;
-				appendDataToList(v.v.type_list,&d);
-				printf("Added %f to list\n",f);
-
-				showTrail(&trail);
 			}else{
 				printf("Error: Not a list\n");
 			}
